@@ -1,3 +1,14 @@
+const winningCombinations = [
+    [[0, 0], [0, 1], [0, 2]], // Top row
+    [[1, 0], [1, 1], [1, 2]], // Middle row
+    [[2, 0], [2, 1], [2, 2]], // Bottom row
+    [[0, 0], [1, 0], [2, 0]], // Left column
+    [[0, 1], [1, 1], [2, 1]], // Middle column
+    [[0, 2], [1, 2], [2, 2]], // Right column
+    [[0, 0], [1, 1], [2, 2]], // Diagonal from top left to bottom right
+    [[0, 2], [1, 1], [2, 0]] // Diagonal from top right to bottom left
+];    
+
 document.addEventListener('DOMContentLoaded', function() {
     let currentPlayer = 'player1';
     let player1Moves = [];
@@ -6,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const boardSize = 3;
     const boardContainer = document.getElementById('tic-tac-toe-board');
 
+
     boardContainer.innerHTML = '';
 
     function createCell(i, j) {
@@ -13,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         cell.classList.add('cell');
         cell.dataset.i = i;
         cell.dataset.j = j;
+        cell.age = 0;
         return cell;
     }
 
@@ -24,63 +37,45 @@ document.addEventListener('DOMContentLoaded', function() {
             for (let j = 0; j < boardSize; j++) {
                 row.appendChild(createCell(i, j));
             }
-
             boardContainer.appendChild(row);
         }
     }
 
     renderBoard();
-
+    // Check cell clicked
     const cells = document.querySelectorAll('.cell');
     cells.forEach(cell => {
         cell.addEventListener('click', () => {
-            console.log(`${currentPlayer} played at (${cell.dataset.i}, ${cell.dataset.j})`);
+            if(cell.age == 0){
+                console.log(`${currentPlayer} played at [${cell.dataset.i}, ${cell.dataset.j}]`);
+                if (currentPlayer == 'player1'){playerQueue = player1Moves;}
+                else{playerQueue = player2Moves;}
 
-            let playerQueue = currentPlayer === 'player1'? player1Moves : player2Moves;
-            playerQueue.push({ player: currentPlayer, position: { i: parseInt(cell.dataset.i), j: parseInt
-(cell.dataset.j) }});
+                cell.age = 1;  
 
-            while (playerQueue.length > maxMovesPerPlayer) {
-                const oldestMoveIndex = playerQueue.length - 1;
-                const oldestCell = document.querySelector(`[data-i="${playerQueue[oldestMoveIndex].position.i}
-"][data-j="${playerQueue[oldestMoveIndex].position.j}"]`);
-                oldestCell.textContent = '';
-                playerQueue.shift();
-            }
+                playerQueue.push({ player: currentPlayer, position: { i: parseInt(cell.dataset.i), j: parseInt(cell.dataset.j) }});
 
-            cell.textContent = currentPlayer === 'player1'? 'x' : 'o';
+                if (playerQueue.length > maxMovesPerPlayer){
+                    const oldestCell = document.querySelector(`[data-i="${playerQueue[0].position.i}"][data-j="${playerQueue[0].position.j}"]`);
+                    oldestCell.style.backgroundColor = 'white';
+                    oldestCell.age = 0;
+                    console.log(oldestCell);
+                    playerQueue.shift();
+                }
+                if (playerQueue.length == maxMovesPerPlayer){
+                    const fadingCell = document.querySelector(`[data-i="${playerQueue[0].position.i}"][data-j="${playerQueue[0].position.j}"]`);
+                    fadingCell.style.backgroundColor = currentPlayer === 'player1'? '#993333' : '#003399';
+                
+                }
+                console.log(playerQueue);
 
-            currentPlayer = currentPlayer === 'player1'? 'player2' : 'player1';
-
-            // Check for win condition
-            if (checkWin(currentPlayer)) {
-                alert(`${currentPlayer} wins`);
-                resetBoard();
+                cell.style.backgroundColor = currentPlayer === 'player1'? 'red' : 'blue';
+                currentPlayer = currentPlayer === 'player1'? 'player2' : 'player1';
+                if (checkWinner(currentPlayer)) { console.log(`${currentPlayer} wins`);}
             }
         });
     });
 
-    function checkWin(player) {
-        // Check rows and columns
-        for (let i = 0; i < boardSize; i++) {
-            if ((cells[i * boardSize + i].textContent === player && cells[i * boardSize + i + 1].textContent
- === player && cells[i * boardSize + i + 2].textContent === player) ||
-                (cells[i].textContent === player && cells[i + boardSize].textContent === player && cells[i + 2
- * boardSize].textContent === player)) {
-                return true;
-            }
-        }
-
-        // Check diagonals
-        if ((cells[0].textContent === player && cells[4].textContent === player && cells[8].textContent ===
- player) ||
-            (cells[2].textContent === player && cells[4].textContent === player && cells[6].textContent ===
- player)) {
-            return true;
-        }
-
-        return false;
-    }
 
     function resetBoard() {
         // Reset the board and players
@@ -91,3 +86,13 @@ document.addEventListener('DOMContentLoaded', function() {
         renderBoard();
     }
 });
+
+
+function checkWinner(player) {
+    return winningCombinations.some(combination => {
+        return combination.every(index => {
+            const cell = document.querySelector(`[data-i="${index[0]}"][data-j="${index[1]}"]`);
+            return cell && cell.textContent === player;
+        });
+    });
+}
