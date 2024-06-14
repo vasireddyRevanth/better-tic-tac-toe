@@ -1,7 +1,24 @@
+@import url(https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700);
+
+html {
+  margin: 0px;
+  height: 100%;
+}
+
+body {
+  background-color: #2d3133;
+  margin: 0px;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #tic-tac-toe-board {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .row {
@@ -9,13 +26,100 @@
     justify-content: space-around; /* Optional: adds space around the cells */
 }
 
+
 .cell {
-    background-color: white;
-    width: 100px;
-    height: 100px;
-    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #4a5054;
+    width: 125px;
+    height: 125px;
+    /* border: 1px solid black; */
     text-align: center;
     vertical-align: middle;
     box-sizing: border-box; /* Ensures padding and border are included in the width/height */
-    margin: 5px; /* Adds some spacing between cells */
+    margin: 7.5px; /* Adds some spacing between cells */
+    display: inline-block;
+    transition-duration: 0.3s;
+    transition-property: box-shadow;
+  
 }
+.cell:hover,
+.cell:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.36em);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, .6)
+}
+
+.modal{
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
+  justify-content: center;
+
+}
+.modal-content {
+  margin: auto;
+  width: 50%;
+  height: 50%;
+  position: relative;
+  /* background-color: #fefefe; */
+  margin: auto;
+  padding: 0;
+  /* border: 1px solid #888; */
+  /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19); */
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.7s;
+  animation-name: animatetop;
+  animation-duration: 0.7s;
+  color: white;
+  text-align: center;
+}
+.modal-content > h1{
+  font-weight:200;
+  font-size: 500%;
+  font-family: 'Jost', Courier, monospace;
+}
+#resetButton {
+  font-family: 'Jost', Courier, monospace;
+  font-weight: 400;
+  font-size: 150%;
+  padding: 0.5em 1em;
+  margin-top: 100px;
+  margin-right: 50px;
+  background-color: #1f231f;
+  color: #fff;
+  border-radius: 10px;
+  border:none;
+  cursor: pointer;
+  position:relative;
+  transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+  box-shadow: 0 2px 5px rgba(143, 137, 137, 0.8);  
+}
+#resetButton:hover,
+#resetButton:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.36em);
+  transform: scale(1.1);
+  box-shadow: 0 2px 5px rgba(143, 137, 137, 0.8);  
+}
+
+#resetButton:active{
+  transform: scale(0.75);
+}
+
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
