@@ -16,10 +16,15 @@ document.addEventListener('DOMContentLoaded', function mainGame() {
     let player2Moves = [];
     const maxMovesPerPlayer = 3;
     const boardSize = 3;
+    const screenContent = document.getElementById('screen-content');
+    const board = document.createElement('div');
+    board.id = 'tic-tac-toe-board';
+    screenContent.innerHTML = '';
+
+    screenContent.appendChild(board);
     const boardContainer = document.getElementById('tic-tac-toe-board');
 
 
-    boardContainer.innerHTML = '';
 
     function createCell(i, j, number) {
         const cell = document.createElement('div');
@@ -45,8 +50,32 @@ document.addEventListener('DOMContentLoaded', function mainGame() {
         }
     }
 
+    function renderButtons(){
+        let setting = document.createElement('div');
+        setting.classList.add('settingsBtn');
+        
+        for(let i = 0; i<3;i++){
+            let bar = document.createElement('div');
+            bar.classList.add('line');
+            setting.appendChild(bar);
+        }
+
+        screenContent.appendChild(setting);
+    
+    }
+
     renderBoard();
+    renderButtons();
+    
+    
     // Check cell clicked
+    document.querySelector(".settingsBtn").addEventListener('click', () => {
+        settingsModal = document.querySelector('.settings-menu');
+        settingsModal.style.display = settingsModal.style.display === "none"? "flex" : "none";
+   
+    });
+
+    
     const cells = document.querySelectorAll('.cell');
     cells.forEach(cell => {
         
@@ -158,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function mainGame() {
     }
 
     function winnerScreen(set){
-        modal = document.querySelector('.modal');
+        modal = document.querySelector('.gameEnd');
         modal.style.display = set === 1? "flex" : "none";
         // modal.style.backgroundColor = currentPlayer === "Player-1"?'rgba(13.7, 43, 29, 0.15)':'rgba(59.6, 19.2, 4.3, 0.15)';
 
@@ -167,7 +196,10 @@ document.addEventListener('DOMContentLoaded', function mainGame() {
         
         reButton = document.getElementById('resetButton');
         reButton.style.boxShadow = currentPlayer === 'Player-1'?WIN_COLOUR_1:WIN_COLOUR_2;
-        reButton.addEventListener('click', resetBoard);
+        reButton.addEventListener('click', () =>{
+            resetBoard();
+            modal.style.display = "none";
+        });
     }
 
     function resetBoard() {
@@ -175,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function mainGame() {
         currentPlayer = 'Player-1';
         player1Moves = [];
         player2Moves = [];
-        boardContainer.innerHTML = '';
+        screenContent.innerHTML = '';
         mainGame();
         winnerScreen(0);
     }

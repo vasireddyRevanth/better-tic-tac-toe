@@ -8,13 +8,32 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="modal">
-    <div class="modal-content">
+    <!-- Settings Button -->
+<!-- <button id="settingsBtn">Settings</button> -->
+<!-- <div class="settingsBtn">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+</div> -->
+
+<!-- Modal or Dropdown Menu Container (hidden initially) -->
+<div id="settingsMenu" class="settings-menu" style="display:none">
+    <div class="settings-menu-content">
+    <ul>
+        <li><a href="#">Option 1</a></li>
+        <li><a href="#">Option 2</a></li>
+        <li><a href="#">Option 3</a></li>
+    </ul>
+    </div>
+</div> 
+<div class="gameEnd">
+    <div class="gameEnd-content">
         <h1 id="endHead"></h1>
         <button id="resetButton">Play Again</button>
     </div>
 </div>
-<div id="tic-tac-toe-board">
+<div id="screen-content"></div>
+<!-- <div id="tic-tac-toe-board"> -->
     <!-- <div class="row">
         <div class="cell" data-i=""></div>
         <div class="cell"></div>
@@ -30,7 +49,7 @@
         <div class="cell"></div>
         <div class="cell"></div>
     </div> -->
-</div>
+<!-- </div> -->
 
 <!-- Your game logic and UI elements will go here -->
 
