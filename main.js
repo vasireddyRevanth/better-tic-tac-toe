@@ -72,9 +72,16 @@ document.addEventListener('DOMContentLoaded', function mainGame() {
     document.querySelector(".settingsBtn").addEventListener('click', () => {
         settingsModal = document.querySelector('.settings-menu');
         settingsModal.style.display = settingsModal.style.display === "none"? "flex" : "none";
+        
    
     });
 
+    document.querySelectorAll('.square').forEach(square => {
+        square.addEventListener('click', function() {
+            // Handle click here
+            console.log(`Selected option: ${this.dataset.value}`);
+        });
+    });
     
     const cells = document.querySelectorAll('.cell');
     cells.forEach(cell => {
