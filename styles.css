@@ -162,6 +162,12 @@ body {
   
 }
 .settings-menu-content{
+  width: 50%;
+  height: 75%;
+  position: fixed;
+
+  background-color: rgb(36, 35, 35);
+  border-radius: 7.5px;
   color: white;
   text-align: center;
 }
@@ -176,32 +182,37 @@ body {
   justify-content: space-around;
 }
 
-.square {
-  width: 100px; /* Adjust size as needed */
-  height: 100px; /* Adjust size as needed */
-  background-size: 200% auto;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-position 0.6s eae-in-out;
-  background-color: #f0f0f0; /* Default color */
-  margin: 10px;
+.square{
+  border-radius: 10px;
+  background-color: #4a5054;
+  width: 125px;
+  height: 125px;
+  /* border: 1px solid black; */
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box; /* Ensures padding and border are included in the width/height */
+  margin: 7.5px; /* Adds some spacing between cells */
+  display: inline-block;
+  transition-duration: 0.3s;
+  transition-property: box-shadow;
+
+}
+ 
+.square:hover,
+.square:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.36em);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, .6)
+}
+.square[data-value="option1"] {
+  background-image: linear-gradient(to right, #2d9965 50%, #98310b 50%);
 }
 
-.square:hover {
-  background-position: right center;
-}
-
-.square[data-value="option1"]:active {
-  background-position: left center;
-  background-color: #ff6347; /* Tomato red */
-}
-
-.square[data-value="option2"]:active {
-  background-position: right center;
+.square[data-value="option2"] {
   background-color: #40e0d0; /* Light sea green */
 }
 
-.square[data-value="option3"]:active {
-  background-position: left center;
+.square[data-value="option3"] {
+
   background-color: #add8e6; /* Light blue */
 }

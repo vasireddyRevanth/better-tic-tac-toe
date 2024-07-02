@@ -71,10 +71,14 @@ document.addEventListener('DOMContentLoaded', function mainGame() {
     // Check cell clicked
     document.querySelector(".settingsBtn").addEventListener('click', () => {
         settingsModal = document.querySelector('.settings-menu');
-        settingsModal.style.display = settingsModal.style.display === "none"? "flex" : "none";
-        
-   
+        settingsModal.style.display = settingsModal.style.display === "none"? "flex" : "none";        
     });
+    
+    document.querySelector(".settings-menu").addEventListener('click', () => {
+        settingsModal = document.querySelector('.settings-menu');
+        settingsModal.style.display = settingsModal.style.display === "none"? "flex" : "none";
+    });
+
 
     document.querySelectorAll('.square').forEach(square => {
         square.addEventListener('click', function() {
