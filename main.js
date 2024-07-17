@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', function mainGame() {
     let currentPlayer = 'Player-1';
     let player1Moves = [];
     let player2Moves = [];
-    const maxMovesPerPlayer = 3;
-    const boardSize = 3;
+    let maxMovesPerPlayer = 3;
+    let boardSize = 3;
     const screenContent = document.getElementById('screen-content');
     const board = document.createElement('div');
     board.id = 'tic-tac-toe-board';
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function mainGame() {
     }
 
     function winnerScreen(set){
-        modal = document.querySelector('.gameEnd');
+        const modal = document.querySelector('.gameEnd');
         modal.style.display = set === 1? "flex" : "none";
         // modal.style.backgroundColor = currentPlayer === "Player-1"?'rgba(13.7, 43, 29, 0.15)':'rgba(59.6, 19.2, 4.3, 0.15)';
 
@@ -224,6 +224,15 @@ document.addEventListener('DOMContentLoaded', function mainGame() {
     }
 
 
+    function colorPicker(){
+        let opntion1 = ["rgb()","rgb()"];
+        let opntion2 = ["rgb()","rgb()"];
+        let opntion3 = ["rgb()","rgb()"];
+        let opntion4 = ["rgb()","rgb()"];
+        let opntion5 = ["rgb()","rgb()"];
+        let opntion6 = ["rgb()","rgb()"];
 
+        
+        
+    }
 });
-

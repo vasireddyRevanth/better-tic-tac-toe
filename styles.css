@@ -14,7 +14,18 @@ body {
   align-items: center;
 }
 
+#screen-content {
+  display: flex;
+  width:80%;
+  height:100vh;
+  justify-content: center;
+  align-items: center;
+}
+
 #tic-tac-toe-board {
+  /* aspect-ratio: 1/1; */
+  height:50%;
+  width: 50vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,21 +33,24 @@ body {
 }
 
 .row {
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: space-around; /* Optional: adds space around the cells */
 }
 
 
 .cell {
-    border-radius: 10px;
+  aspect-ratio: 1/1;
+    border-radius: 10%;
     background-color: #4a5054;
-    width: 125px;
-    height: 125px;
+    height: 90%;
+    width: auto;
     /* border: 1px solid black; */
     text-align: center;
     vertical-align: middle;
     box-sizing: border-box; /* Ensures padding and border are included in the width/height */
-    margin: 7.5px; /* Adds some spacing between cells */
+    margin: 1%; /* Adds some spacing between cells */
     display: inline-block;
     transition-duration: 0.3s;
     transition-property: box-shadow;
@@ -162,19 +176,26 @@ body {
   
 }
 .settings-menu-content{
+  margin-top:6%;
   width: 50%;
   height: 75%;
   position: fixed;
 
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.7s;
+  animation-name: animatetop;
+  animation-duration: 0.7s;
+
   background-color: rgb(36, 35, 35);
   border-radius: 7.5px;
   color: white;
-  text-align: center;
+  text-align: left;
 }
 .settings-menu-content > h1{
+  margin: 5%;
   font-weight:200;
-  font-size: 500%;
   font-family: 'Jost', Courier, monospace;
+  font-size: 500%;
 }
 
 .radio-squares {
@@ -183,7 +204,7 @@ body {
 }
 
 .square{
-  border-radius: 10px;
+  border-radius: 10%;
   background-color: #4a5054;
   width: 125px;
   height: 125px;
@@ -216,3 +237,37 @@ body {
 
   background-color: #add8e6; /* Light blue */
 }
+
+.size-square{
+
+  aspect-ratio: 200/75;
+  border-radius: 12%;
+  background-color: #4a5054;
+  width: 125px;
+  height: auto;
+  /* border: 1px solid black; */
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box; /* Ensures padding and border are included in the width/height */
+  /* margin: 7.5px; Adds some spacing between cells */
+  display: flex;
+  transition-duration: 0.3s;
+  transition-property: box-shadow;
+  margin: 5%;
+  align-items: center;
+  justify-content: center;
+}
+.size-square > p{
+  margin: 0%;
+  font-weight:200;
+  font-family: 'Jost', Courier, monospace;
+  font-size: 200%;
+}
+ 
+.size-square:hover,
+.size-square:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.36em);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, .6)
+}
+
